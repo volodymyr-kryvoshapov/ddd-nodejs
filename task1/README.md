@@ -34,3 +34,13 @@
 
 7. Так же поступим и с логгером, делаем его пристегиваемым: выносим в конфиги его название, при старте подгружаем нужный и перенаправляем
 `console` в него. Можете взять логгер [pino](https://github.com/pinojs/pino).
+
+
+
+## Adminer
+
+- System: PostgreSQL
+- Server: postgres
+- Username: see in docker-compose
+- Password: see in docker-compose
+- Database: example
