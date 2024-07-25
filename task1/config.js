@@ -1,6 +1,7 @@
+const constants = require('./constants');
+
 module.exports = {
-    transport: 'http',
-    // transport: 'ws',
+    transport: constants.transport.WS,
     apiPath: './api',
     server: {
         port: 8001,

@@ -1,12 +1,22 @@
+import { apiScheme } from "./config.js";
+
+const scaffoldSchemes = {
+    [apiScheme.HTTP]: scaffoldHttp,
+    [apiScheme.WS]: scaffoldWs,
+};
+
 export async function scaffold(url, structure) {
-    if (url.startsWith('ws')) {
-        return scaffoldWs(url, structure);
-    }
-    if (url.startsWith('http')) {
-        return scaffoldHttp(url, structure);
+    const scheme = getURLScheme(url);
+
+    if (!scaffoldSchemes[scheme]) {
+        throw new Error(`Unknown scheme: ${scheme}`);
     }
 
-    throw new Error('Unsupported protocol');
+    return scaffoldSchemes[scheme](url, structure);
+}
+
+function getURLScheme(url) {
+    return url.split('://')[0];
 }
 
 function scaffoldWs(url, structure) {
