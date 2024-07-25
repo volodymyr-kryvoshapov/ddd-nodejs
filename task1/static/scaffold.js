@@ -1,18 +1,18 @@
-import { apiScheme } from "./config.js";
+import { transport } from "./config.js";
 
-const scaffoldSchemes = {
-    [apiScheme.HTTP]: scaffoldHttp,
-    [apiScheme.WS]: scaffoldWs,
+const scaffoldTransport = {
+    [transport.HTTP]: scaffoldHttp,
+    [transport.WS]: scaffoldWs,
 };
 
 export async function scaffold(url, structure) {
     const scheme = getURLScheme(url);
 
-    if (!scaffoldSchemes?.[scheme]) {
+    if (!scaffoldTransport?.[scheme]) {
         throw new Error(`Unknown scheme: ${scheme}`);
     }
 
-    return scaffoldSchemes[scheme](url, structure);
+    return scaffoldTransport[scheme](url, structure);
 }
 
 function getURLScheme(url) {
