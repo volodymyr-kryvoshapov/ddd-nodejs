@@ -11,6 +11,17 @@ const receiveArgs = async (req) => {
 
 module.exports = (routing, port) => {
   http.createServer(async (req, res) => {
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+      res.writeHead(204);
+      res.end();
+      return;
+    }
+
     const { url, socket } = req;
     const [name, method, id] = url.substring(1).split('/');
     const entity = routing[name];

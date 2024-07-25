@@ -1,5 +1,6 @@
 module.exports = {
-    transport: 'ws', // http, ws,
+    transport: 'http',
+    // transport: 'ws',
     apiPath: './api',
     server: {
         port: 8001,
