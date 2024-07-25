@@ -8,7 +8,7 @@ const scaffoldSchemes = {
 export async function scaffold(url, structure) {
     const scheme = getURLScheme(url);
 
-    if (!scaffoldSchemes[scheme]) {
+    if (!scaffoldSchemes?.[scheme]) {
         throw new Error(`Unknown scheme: ${scheme}`);
     }
 
