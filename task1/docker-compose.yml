@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16.3
+    restart: always
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: marcus
+      POSTGRES_PASSWORD: marcus
+      POSTGRES_DB: example
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db:/db
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
