@@ -10,6 +10,10 @@ module.exports = {
         port: 8000,
         path: './static',
     },
+    sslOptions: {
+        key: './ssl/localhost-key.pem',
+        cert: './ssl/localhost-cert.pem',
+    },
     storage: {
         pg: {
             host: '127.0.0.1',

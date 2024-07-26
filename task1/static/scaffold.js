@@ -2,7 +2,9 @@ import { transport } from "./config.js";
 
 const scaffoldTransport = {
     [transport.HTTP]: scaffoldHttp,
+    [transport.HTTPS]: scaffoldHttp,
     [transport.WS]: scaffoldWs,
+    [transport.WSS]: scaffoldWs,
 };
 
 export async function scaffold(url, structure) {

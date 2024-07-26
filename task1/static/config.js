@@ -1,6 +1,8 @@
 export const transport = {
     HTTP: 'http',
+    HTTPS: 'https',
     WS: 'ws',
+    WSS: 'wss',
 };
 
 export const config = Object.freeze({

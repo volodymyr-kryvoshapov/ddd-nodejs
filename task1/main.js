@@ -3,15 +3,17 @@
 const fsp = require('node:fs').promises;
 const path = require('node:path');
 const config = require('./config.js');
-const staticServer = require('./static.js');
+const constants = require('./constants.js');
 const load = require('./load.js');
 const db = require('./db.js');
 const hash = require('./hash.js');
 const logger = require('./logger.js');
-const server = require(`./${config.transport}.js`);
+const server = require(`./server/${config.transport}.js`);
+const staticServer = require(getStaticServerPath(constants.transport, config.transport));
 
 const sandbox = {
   config: Object.freeze(config),
+  constants: Object.freeze(constants),
   console: Object.freeze(logger),
   db: Object.freeze(db),
   common: { hash },
@@ -28,6 +30,21 @@ const routing = {};
     routing[serviceName] = await load(filePath, sandbox);
   }
 
-  staticServer(config.staticServer.path, config.staticServer.port);
-  server(routing, config.server.port);
+
+  const sslOptions = {
+    key: await fsp.readFile(path.resolve(config.sslOptions.key)),
+    cert: await fsp.readFile(path.resolve(config.sslOptions.cert)),
+  };
+
+  staticServer(config.staticServer.path, config.staticServer.port, sslOptions);
+  server(routing, config.server.port, sslOptions);
 })();
+
+function getStaticServerPath(transports, transport) {
+  const server = [
+    transports.HTTPS,
+    transports.WSS,
+  ].includes(transport) ? 'https' : 'http';
+
+  return `./server-static/${server}.js`
+}

@@ -44,3 +44,32 @@
 - Username: see in docker-compose
 - Password: see in docker-compose
 - Database: example
+
+
+## SSL
+
+To generate a self-signed SSL certificate for testing purposes, you can use the openssl command-line tool. Here are the steps:
+
+1. Open Terminal on your Mac.
+
+2. Generate a Private Key:
+
+`openssl genrsa -out localhost-key.pem 2048`
+
+3. Generate a Certificate Signing Request (CSR):
+
+`openssl req -new -key localhost-key.pem -out localhost.csr -subj "/CN=localhost"`
+
+You will be prompted to enter information about your organization. For testing purposes, you can fill in the fields with dummy data.
+
+4. Generate the Self-Signed Certificate:
+
+`openssl x509 -req -days 365 -in localhost.csr -signkey localhost-key.pem -out localhost-cert.pem`
+
+This command creates a certificate that is valid for 365 days.
+
+5. Clean Up (optional): You can remove the CSR file as it is no longer needed:
+
+`rm localhost.csr`
+
+After running these commands, you will have two files: private-key.pem and certificate.pem. You can use these files in your Node.js application to set up an HTTPS server.
