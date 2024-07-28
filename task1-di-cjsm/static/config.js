@@ -6,7 +6,7 @@ export const transport = {
 };
 
 export const config = Object.freeze({
-    apiUrl: `${transport.WS}://127.0.0.1:8001/`,
+    apiUrl: `${transport.WSS}://127.0.0.1:8001/`,
     apiStructure: {
         user: {
             create: ['record'],
