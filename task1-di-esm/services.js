@@ -1,7 +1,7 @@
 
 const config = require('./config.js');
 const constants = require('./constants.js');
-const logger = require('./logger.js');
+const logger = require(`./logger/${config.logger}.js`);
 const db = require('./db.js');
 const hash = require('./hash.js');
 

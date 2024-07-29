@@ -2,6 +2,7 @@ const constants = require('./constants');
 
 module.exports = {
     transport: constants.transport.WSS,
+    logger: constants.logger.PINO,
     apiPath: './api',
     server: {
         port: 8001,

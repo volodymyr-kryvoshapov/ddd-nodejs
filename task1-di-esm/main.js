@@ -19,8 +19,6 @@ const routing = {};
     routing[serviceName] = (await import(filePath)).default;
   }
 
-  console.log('routing', routing);
-
   const sslOptions = {
     key: await fsp.readFile(path.resolve(config.sslOptions.key)),
     cert: await fsp.readFile(path.resolve(config.sslOptions.cert)),

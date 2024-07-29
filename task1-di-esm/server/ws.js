@@ -1,7 +1,7 @@
 'use strict';
 
-const console = require('../logger.js');
 const { Server } = require('ws');
+const {console} = require('../services.js');
 
 const onConnection = (connection, req, routing) => {
   const ip = req.socket.remoteAddress;
