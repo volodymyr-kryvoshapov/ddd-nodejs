@@ -5,4 +5,8 @@ module.exports = Object.freeze({
         WS: 'ws',
         WSS: 'wss',
     },
+    logger: {
+        NATIVE: 'NativeLogger',
+        PINO: 'PinoLogger',
+    }
 });

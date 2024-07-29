@@ -2,12 +2,12 @@
 
 const fsp = require('node:fs').promises;
 const path = require('node:path');
-const config = require('./config.js');
 const constants = require('./constants.js');
+const config = require('./config.js');
 const load = require('./load.js');
 const db = require('./db.js');
 const hash = require('./hash.js');
-const logger = require('./logger.js');
+const logger = require(`./logger/${config.logger}.js`);
 const server = require(`./server/${config.transport}.js`);
 const staticServer = require(getStaticServerPath(constants.transport, config.transport));
 

@@ -1,0 +1,4 @@
+2024-07-29T17:41:48	WS API on port 8001
+{"level":30,"time":1722275711255,"pid":60974,"hostname":"Volodymyrs-MacBook-Pro.local","msg":"WS API on port 8001"}
+{"level":30,"time":1722275726254,"pid":60974,"hostname":"Volodymyrs-MacBook-Pro.local","msg":"::ffff:127.0.0.1 user.read(3)"}
+{"level":30,"time":1722275727813,"pid":60974,"hostname":"Volodymyrs-MacBook-Pro.local","msg":"::ffff:127.0.0.1 user.read(1)"}

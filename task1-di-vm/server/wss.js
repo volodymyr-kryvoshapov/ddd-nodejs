@@ -2,7 +2,8 @@
 
 const https = require('node:https');
 const { Server } = require('ws');
-const console = require('../logger.js');
+const config = require('../config.js');
+const console = require(`../logger/${config.logger}.js`);
 const { onConnection } = require('./ws.js');
 
 module.exports = (routing, port, sslOptions) => {

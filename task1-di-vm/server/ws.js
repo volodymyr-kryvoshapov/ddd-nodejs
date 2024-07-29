@@ -1,6 +1,7 @@
 'use strict';
 
-const console = require('../logger.js');
+const config = require('../config.js');
+const console = require(`../logger/${config.logger}.js`);
 const { Server } = require('ws');
 
 const onConnection = (connection, req, routing) => {

@@ -14,7 +14,7 @@ const COLORS = {
 
 const DATETIME_LENGTH = 19;
 
-class Logger {
+class NativeLogger {
   constructor(logPath) {
     this.path = logPath;
     const date = new Date().toISOString().substring(0, 10);
@@ -68,4 +68,4 @@ class Logger {
   }
 }
 
-module.exports = new Logger('./log');
+module.exports = new NativeLogger('./log');
