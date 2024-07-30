@@ -2,7 +2,7 @@
 
 const http = require('node:http');
 
-const createServer = async (req, res, routing) => {
+const createServer = async (req, res, routing, logger) => {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -25,7 +25,7 @@ const createServer = async (req, res, routing) => {
   const args = [];
   if (signature.includes('(id')) args.push(id);
   if (signature.includes('{')) args.push(await receiveArgs(req));
-  console.log(`${socket.remoteAddress} ${method} ${url}`);
+  logger.log(`${socket.remoteAddress} ${method} ${url}`);
   const result = await handler(...args);
   res.end(JSON.stringify(result.rows));
 }
@@ -37,10 +37,10 @@ const receiveArgs = async (req) => {
   return JSON.parse(data);
 }
 
-module.exports = (routing, port) => {
-  http.createServer((req, res) => createServer(req, res, routing)).listen(port);
+module.exports = (routing, port, logger) => {
+  http.createServer((req, res) => createServer(req, res, routing, logger)).listen(port);
 
-  console.log(`HTTP API on port ${port}`);
+  logger.log(`HTTP API on port ${port}`);
 };
 
 module.exports.createServer = createServer;

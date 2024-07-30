@@ -3,10 +3,10 @@
 const https = require('node:https');
 const { createServer } = require('./http.js');
 
-module.exports = (routing, port, sslOptions) => {
+module.exports = (routing, port, logger, sslOptions) => {
   https
-    .createServer(sslOptions, (req, res) => createServer(req, res, routing))
+    .createServer(sslOptions, (req, res) => createServer(req, res, routing, logger))
     .listen(port);
 
-  console.log(`HTTPS API on port ${port}`);
+  logger.log(`HTTPS API on port ${port}`);
 };

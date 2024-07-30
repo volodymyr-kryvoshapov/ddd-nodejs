@@ -1,3 +1,1 @@
-import {db} from '../services.mjs';
-
-export default db('city');
+export default (db) => db('city');

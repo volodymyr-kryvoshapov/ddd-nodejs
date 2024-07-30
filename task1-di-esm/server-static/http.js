@@ -32,10 +32,10 @@ const createServer = async (req, res, root) => {
 };
 
 
-module.exports = (root, port) => {
+module.exports = (root, port, logger) => {
   http.createServer(async (req, res) => createServer(req, res, root)).listen(port);
 
-  console.log(`Static HTTP on port ${port}`);
+  logger.log(`Static HTTP on port ${port}`);
 };
 
 module.exports.createServer = createServer;

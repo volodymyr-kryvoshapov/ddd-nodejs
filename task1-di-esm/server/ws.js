@@ -1,9 +1,8 @@
 'use strict';
 
 const { Server } = require('ws');
-const {console} = require('../services.js');
 
-const onConnection = (connection, req, routing) => {
+const onConnection = (connection, req, routing, logger) => {
   const ip = req.socket.remoteAddress;
 
   connection.on('message', async (message) => {
@@ -21,23 +20,23 @@ const onConnection = (connection, req, routing) => {
     }
     const json = JSON.stringify(args);
     const parameters = json.substring(1, json.length - 1);
-    console.log(`${ip} ${name}.${method}(${parameters})`);
+    logger.log(`${ip} ${name}.${method}(${parameters})`);
     try {
       const result = await handler(...args);
       connection.send(JSON.stringify(result.rows), { binary: false });
     } catch (err) {
-      console.error(err);
+      logger.error(err);
       connection.send('"Server error"', { binary: false });
     }
   });
 }
 
-module.exports = (routing, port) => {
+module.exports = (routing, port, logger) => {
   const ws = new Server({ port });
 
-  ws.on('connection', (connection, req) => onConnection(connection, req, routing));
+  ws.on('connection', (connection, req) => onConnection(connection, req, routing, logger));
 
-  console.log(`WS API on port ${port}`);
+  logger.log(`WS API on port ${port}`);
 };
 
 module.exports.onConnection = onConnection;
